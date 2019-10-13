@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro de Produtos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-7">
+                    <h2>Todos os Produtos</h2>
+                </div>
+                <form class="col-5 form-input">
+                    <h1>Cadastrar Produtos</h1>
+                    <div class="form-group">
+                        <label for="product-name">Nome</label>
+                        <input type="text" name="product-name" class="form-control" id="product-name" required placeholder="Insira o nome do produto">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Categoria</label>
+                        <select class="form-control" name="product-category" id="product-category">
+                            <option value="select" selected disabled>Selecione uma categoria</option>
+                            <option value="a">a</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Descrição</label>
+                        <textarea class="form-control" name="product-description" id="product-description" cols="30" rows="3"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-quantity">Quantidade</label>
+                        <input type="number" name="product-quantity" class="form-control" id="product-quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Preço</label>
+                        <input type="number" name="product-price" id="product-price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">Foto do Produto</label>
+                        <input type="file" name="product-image" id="product-image" >
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+
+                </form>
+        </div>
+
+    </main>
+
+
+</body>
+</html>

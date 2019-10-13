@@ -1,0 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Input form styles (Right) */
+
+.form-input {
+    padding: 25px;
+    background-color: #f8f9fa;
+    margin: 20px 0;
+    border-radius: 10px;
+}
