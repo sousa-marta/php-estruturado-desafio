@@ -7,28 +7,30 @@
 <?php
   include("variables.php");
   include("validations.php");
+  var_dump($products);
   
-
   // Criando função para acrescentar novos produtos em um arquivo Json:
   function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$productImage){
     $fileName = "products.json";
 
     //Verificando se arquivo já existe ou precisa ser criado:
     if(file_exists($fileName)){
-      //Pegando informações que já estão no arquivo json e convertendo novamente para array:
+      //Pegando informações que estão no arquivo json e convertendo para array:
       $jsonFile = file_get_contents($fileName);
       $products = json_decode($jsonFile,true); //para converter em array e não object
 
       //Adicionando novo produto na array existente:
       $products[] = ["name" => $productName, "category" => $productCategory, "description" => $productDescription, "quantity" => $productQuantity, "price" => $productPrice, "image" => $productImage];
 
-      //Transformando essa array em arquivo .json:
-      $jsonEncoded = json_encode($products);
-      //Salvando os dados desse json dentro do arquivo. Se o arquivo não existir, cria. :
-      $jsonAdd = file_put_contents($fileName,$jsonEncoded);
-  
-      var_dump($products);
 
+/*       //Adicionando um novo produto na array que estava dentro do produto:
+      $products[] = ["name" => $productName, "category" => $productCategory, "description" => $productDescription, "quantity" => $productQuantity, "price" => $productPrice, "image" => $productImage];
+
+      //Transformando array em json:
+      $jsonEncoded = json_encode($products);
+      //Salvando o json dentro de um arquivo. FILE_APPEND para acrescentar ao final do arquivo.
+      $jsonAdd = file_put_contents($fileName,$jsonEncoded,FILE_APPEND);
+ */
       if($jsonAdd){
         return "O produto foi adicionado no cadastro corretamente";
       }else {
@@ -36,8 +38,10 @@
       }
 
     }else {
-      //Se já exisir, acrescentar o último produto cadastrado numa array:
-      $products[] = ["name" => $productName, "category" => $productCategory, "description" => $productDescription, "quantity" => $productQuantity, "price" => $productPrice, "image" => $productImage];
+      //Se já existir, acrescentar o último produto cadastrado numa array:
+      $products = [
+        ["name" => $productName, "category" => $productCategory, "description" => $productDescription, "quantity" => $productQuantity, "price" => $productPrice, "image" => $productImage]
+      ];
 
       //Transformando essa array em arquivo .json:
       $jsonEncoded = json_encode($products);
@@ -63,7 +67,9 @@
 
     //Chamando a função para salvar o arquivo no .json:
     echo addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath);
+
   }
+
 
 ?>
 
@@ -79,10 +85,10 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main class="container-fluid">
-    <div class="row d-flex justify-content-around">
+  <main class="container">
+    <div class="row">
       <!-- Tabela de Produtos Cadastrados  -->
-      <div class="col-6">
+      <div class="col-7">
         <h2>Todos os Produtos Cadastrados</h2>
         <?php if($products){ ?>
           <table>
@@ -91,7 +97,7 @@
               <th>Categoria</th>
               <th>Preço</th>
             </tr>
-            <?php foreach($products as $row){ ?>
+            <?php foreach ($products as $row){ ?>
             <tr>
               <td><?= $row["name"]; ?></td>
               <td><?= $row["category"]; ?></td>
@@ -100,10 +106,11 @@
             <?php } ?>
           </table> 
         <?php } ?>
+      
       </div>
 
       <!-- Formulário de Cadastro de Produtos -->
-      <form class="col-4 form-input" method="post" action="" enctype="multipart/form-data">
+      <form class="col-5 form-input" method="post" action="" enctype="multipart/form-data">
         <h1>Cadastrar Produtos</h1>
         <div class="form-group">
           <label for="productName">Nome</label>

@@ -1,19 +1,7 @@
-<!-- Fazer um sort por categoria -->
 <?php 
 
-/* $productClasses = ['Camiseta', 'Calças', 'Vestidos', 'Acessórios', 'Bermudas'];
-$productClassesSorted = sort($productClasses);
-var_dump($productClassesSorted);
-Colocar em ordem alfabética na parte do form */
-
 // Lista de Categorias Possíveis:
-
 $productCategoryList = ["Camisetas", "Calças", "Vestidos", "Acessórios"];
-// var_dump($productCategoryList);
-/* $productCategoryListUnsorted = ["Camisetas", "Calças", "Vestidos", "Acessórios"];
-$productCategoryList = sort($productCategoryListUnsorted);
-var_dump($productCategoryList); */
-
 
 // Atribuindo os valores lançados no formulário/input às variáveis 
 $productName = $_POST['productName'];
@@ -22,6 +10,9 @@ $productDescription = $_POST['productDescription'];
 $productQuantity = $_POST['productQuantity'];
 $productPrice = $_POST['productPrice'];
 // $productImage = $_POST['productImage'];
+
+//Criando uma array com informações salvas no Json:
+$products = json_decode(file_get_contents(__DIR__."/products.json"),true); 
 
 // $productDetails = [
 //   ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' =>    $productQuantity, 'price' => $productPrice, 'img' => $productImage]
