@@ -9,20 +9,23 @@ Colocar em ordem alfabética na parte do form */
 // Lista de Categorias Possíveis:
 
 $productCategoryList = ["Camisetas", "Calças", "Vestidos", "Acessórios"];
-var_dump($productCategoryList);
+// var_dump($productCategoryList);
 /* $productCategoryListUnsorted = ["Camisetas", "Calças", "Vestidos", "Acessórios"];
 $productCategoryList = sort($productCategoryListUnsorted);
 var_dump($productCategoryList); */
 
 
+// Atribuindo os valores lançados no formulário/input às variáveis 
 $productName = $_POST['productName'];
 $productCategory = $_POST['productCategory'];
 $productDescription = $_POST['productDescription'];
 $productQuantity = $_POST['productQuantity'];
 $productPrice = $_POST['productPrice'];
-$productImage = $_POST['productImage'];
+// $productImage = $_POST['productImage'];
 
-$productDetails = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'img' => $productImage];
+// $productDetails = [
+//   ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' =>    $productQuantity, 'price' => $productPrice, 'img' => $productImage]
+// ];
 
 
 ?>
