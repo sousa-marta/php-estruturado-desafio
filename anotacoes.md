@@ -16,3 +16,6 @@ MELHORIAS NO CÓDIGO:
 
 VISUAL:
 - colocar linha entre produtos impressos;
+
+GITHUB:
+- depois que ter certeza que a branch fez o merge certinho, deletar a branch session
