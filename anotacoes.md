@@ -34,6 +34,8 @@ session(start);
 unset($_SESSION['products']['1'];
 var_dump($_SESSION);
 
+FUNÇÃO EDITAR:
+https://www.php.net/manual/pt_BR/function.array-splice.php
 
 <!-- Backlog
   2. Deixar categoria de produtos dinâmica em ordem alfabetica
