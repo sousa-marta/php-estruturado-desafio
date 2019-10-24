@@ -1,12 +1,6 @@
-<!-- Backlog
-  1. FAZER VALIDAÇÕES DO ARQUIVO PARA TER CERTEZA QUE É FOTO
-  2. Deixar categoria de produtos dinâmica em ordem alfabetica
-  3. Required no select? -->
-
-  
 <?php
   //Incluindo variáveis.php que já contém session_start:
-  include("variables.php");
+  require("variables.php");
 
   // Para resetar a session products
   // unset($_SESSION['products']);
