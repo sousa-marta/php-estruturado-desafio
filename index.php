@@ -5,10 +5,14 @@
 
   
 <?php
-  //Incluindo variáveis.php que contém session_start:
+  //Incluindo variáveis.php que já contém session_start:
   include("variables.php");
 
+  // Para resetar a session products
   // unset($_SESSION['products']);
+  // exit;
+
+  // var_dump($_SESSION);
   var_dump($_SESSION['products']);
 
   //Criando variável de produtos para salvar todas informações.
@@ -16,10 +20,14 @@
 
   // Criando função para acrescentar novos produtos numa session. Entra com 
   function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
+    //Se ainda não teve nenhum produto adicionado:
     if(!isset($_SESSION['products'])){
       $_SESSION['products'] = [];
 
-      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      //Criando primeiro ID da lista:
+      $id = 1;
+
+      $_SESSION['products'][] = ['id' => $id, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
 
       //Validação para verificar se o arquivo foi adicionado corretamente:
       if(!$_SESSION['products']){
@@ -27,8 +35,16 @@
       }else {
         return "O produto foi adicionado no cadastro corretamente";
       }
+
+    //Se já tem um produto adicionado:
     }else {
-      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      //Pegando posição na array do último ID (conta quantos elementos tem no array e descresce de 1 para pegar a posição real):
+      $idLastPosition = count($_SESSION['products'])-1; 
+
+      //Pega o valor do ID da última posição e acrescenta um para colocar na array produtos:
+      $idLast = $_SESSION['products'][$idLastPosition]['id']+1;
+
+      $_SESSION['products'][] = ['id' => $idLast, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
       //Validação para verificar se o arquivo foi adicionado corretamente:
       if(!$_SESSION['products']){
         return "Não foi possível cadastrar o produto corretamente";
