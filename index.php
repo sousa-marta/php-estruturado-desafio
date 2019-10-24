@@ -8,6 +8,7 @@
   //Incluindo variáveis.php que contém session_start:
   include("variables.php");
 
+  // unset($_SESSION['products']);
   var_dump($_SESSION['products']);
 
   //Criando variável de produtos para salvar todas informações.
@@ -15,14 +16,25 @@
 
   // Criando função para acrescentar novos produtos numa session. Entra com 
   function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
+    if(!isset($_SESSION['products'])){
+      $_SESSION['products'] = [];
 
-    $_SESSION['products'] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
 
-    //Validação para verificar se o arquivo foi adicionado corretamente:
-    if(!$_SESSION['products']){
-      return "Não foi possível cadastrar o produto corretamente";
+      //Validação para verificar se o arquivo foi adicionado corretamente:
+      if(!$_SESSION['products']){
+        return "Não foi possível cadastrar o produto corretamente";
+      }else {
+        return "O produto foi adicionado no cadastro corretamente";
+      }
     }else {
-      return "O produto foi adicionado no cadastro corretamente";
+      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      //Validação para verificar se o arquivo foi adicionado corretamente:
+      if(!$_SESSION['products']){
+        return "Não foi possível cadastrar o produto corretamente";
+      }else {
+        return "O produto foi adicionado no cadastro corretamente";
+      }
     }
   }
     
@@ -67,9 +79,9 @@
             </tr>
             <?php foreach($_SESSION['products'] as $row){ ?>
             <tr>
-              <td><?= $row['name']; ?></td>
-              <td><?= $row['category']; ?></td>
-              <td><?= $row['price']; ?></td>
+              <td><?= $row["name"]; ?></td>
+              <td><?= $row["category"]; ?></td>
+              <td><?= $row["price"]; ?></td>
             </tr>
             <?php } ?>
           </table> 
