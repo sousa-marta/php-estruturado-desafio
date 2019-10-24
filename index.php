@@ -15,8 +15,6 @@
   // var_dump($_SESSION);
   var_dump($_SESSION['products']);
 
-  //Criando variável de produtos para salvar todas informações.
-
 
   // Criando função para acrescentar novos produtos numa session. Entra com 
   function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
@@ -95,7 +93,7 @@
             </tr>
             <?php foreach($_SESSION['products'] as $row){ ?>
             <tr>
-              <td><?= $row["name"]; ?></td>
+              <td><a href="productPage.php?productID=<?= $row['id']; ?>"><?= $row["name"]; ?></a></td>
               <td><?= $row["category"]; ?></td>
               <td><?= $row["price"]; ?></td>
             </tr>
