@@ -5,63 +5,63 @@
 
   
 <?php
+  //Incluindo variáveis.php que já contém session_start:
   include("variables.php");
-  include("validations.php");
-  
 
-  // Criando função para acrescentar novos produtos em um arquivo Json:
-  function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$productImage){
-    $fileName = "products.json";
+  // Para resetar a session products
+  // unset($_SESSION['products']);
+  // exit;
 
-    //Verificando se arquivo já existe ou precisa ser criado:
-    if(file_exists($fileName)){
-      //Pegando informações que já estão no arquivo json e convertendo novamente para array:
-      $jsonFile = file_get_contents($fileName);
-      $products = json_decode($jsonFile,true); //para converter em array e não object
+  // var_dump($_SESSION);
+  var_dump($_SESSION['products']);
 
-      //Adicionando novo produto na array existente:
-      $products[] = ["name" => $productName, "category" => $productCategory, "description" => $productDescription, "quantity" => $productQuantity, "price" => $productPrice, "image" => $productImage];
 
-      //Transformando essa array em arquivo .json:
-      $jsonEncoded = json_encode($products);
-      //Salvando os dados desse json dentro do arquivo. Se o arquivo não existir, cria. :
-      $jsonAdd = file_put_contents($fileName,$jsonEncoded);
-  
-      var_dump($products);
+  // Criando função para acrescentar novos produtos numa session. Entra com 
+  function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
+    //Se ainda não teve nenhum produto adicionado:
+    if(!isset($_SESSION['products'])){
+      $_SESSION['products'] = [];
 
-      if($jsonAdd){
-        return "O produto foi adicionado no cadastro corretamente";
-      }else {
-        return "Não foi possível cadastrar o produto corretamente";
-      }
+      //Criando primeiro ID da lista:
+      $id = 1;
 
-    }else {
-      //Se já exisir, acrescentar o último produto cadastrado numa array:
-      $products[] = ["name" => $productName, "category" => $productCategory, "description" => $productDescription, "quantity" => $productQuantity, "price" => $productPrice, "image" => $productImage];
-
-      //Transformando essa array em arquivo .json:
-      $jsonEncoded = json_encode($products);
-      //Salvando os dados desse json dentro do arquivo. Se o arquivo não existir, cria. :
-      $jsonAdd = file_put_contents($fileName,$jsonEncoded);
+      $_SESSION['products'][] = ['id' => $id, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
 
       //Validação para verificar se o arquivo foi adicionado corretamente:
-      if($jsonAdd){
-        return "O produto foi adicionado no cadastro corretamente";
-      }else {
+      if(!$_SESSION['products']){
         return "Não foi possível cadastrar o produto corretamente";
+      }else {
+        return "O produto foi adicionado no cadastro corretamente";
+      }
+
+    //Se já tem um produto adicionado:
+    }else {
+      //Pegando posição na array do último ID (conta quantos elementos tem no array e descresce de 1 para pegar a posição real):
+      $idLastPosition = count($_SESSION['products'])-1; 
+
+      //Pega o valor do ID da última posição e acrescenta um para colocar na array produtos:
+      $idLast = $_SESSION['products'][$idLastPosition]['id']+1;
+
+      $_SESSION['products'][] = ['id' => $idLast, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      //Validação para verificar se o arquivo foi adicionado corretamente:
+      if(!$_SESSION['products']){
+        return "Não foi possível cadastrar o produto corretamente";
+      }else {
+        return "O produto foi adicionado no cadastro corretamente";
       }
     }
   }
-
+    
+  //CADASTRO DE PRODUTO:
   if($_POST){
     //Movendo imagem para pasta do projeto:
-    $imgName = $_FILES["productImage"]["name"];
-    $tmpPath = $_FILES["productImage"]["tmp_name"];
+    $imgName = $_FILES['productImage']['name'];
+    $tmpPath = $_FILES['productImage']['tmp_name'];
     $imgPath = dirname(__FILE__)."/productsImgs/".$imgName;
 
     $moveFile = move_uploaded_file($tmpPath, $imgPath);
 
-    //Chamando a função para salvar o arquivo no .json:
+    //Chamando a função para salvar o arquivo na session:
     echo addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath);
   }
 
@@ -84,16 +84,16 @@
       <!-- Tabela de Produtos Cadastrados  -->
       <div class="col-6">
         <h2>Todos os Produtos Cadastrados</h2>
-        <?php if($products){ ?>
+         <?php if(isset($_SESSION['products'])){ ?>
           <table>
             <tr>
               <th>Nome</th>
               <th>Categoria</th>
               <th>Preço</th>
             </tr>
-            <?php foreach($products as $row){ ?>
+            <?php foreach($_SESSION['products'] as $row){ ?>
             <tr>
-              <td><?= $row["name"]; ?></td>
+              <td><a href="productPage.php?productID=<?= $row['id']; ?>"><?= $row["name"]; ?></a></td>
               <td><?= $row["category"]; ?></td>
               <td><?= $row["price"]; ?></td>
             </tr>
@@ -115,7 +115,7 @@
           <select class="form-control" name="productCategory" id="productCategory">
             <option value="select" selected disabled>Selecione uma categoria</option>
             <?php
-              foreach ($productCategoryList as $category) { ?>
+              foreach ($_SESSION['productCategoryList'] as $category) { ?>
               <option value="<?= $category ?>"><?= $category ?></option>    
             <?php } ?>
           </select>
