@@ -7,7 +7,7 @@
 
   //Pegando o valor do ID do produto recebido:
   $productID = $_GET['productID'];
-  
+  // var_dump($_GET);
 
   // ESTÁ RETORNANDO FALSE.... :( ------------------>
 
@@ -16,8 +16,6 @@
     foreach ($_SESSION['products'] as $product) {
       if($product['id'] == $productID){
         return $product;
-      }else{
-        return false;
       }
     }
   }
@@ -47,26 +45,27 @@
     <div>
       <div class="row justify-content-between">
         <section class="col-4">
-          <img src="productsImgs/calca-de-couro-ecologico-preta-colcci_285250_600_1.jpg" alt=""  class="product-image">
+          <img src="<?= $product['image']; ?>" alt=""  class="product-image">
         </section>
+
         <section class="col-8 d-flex flex-column align-items-start">
-          <h1>Nome do produto</h1>
+          <h1><?= $product['name']; ?></h1>
           <div class="py-3">
             <p>Categoria</p>
-            <h5>#Categoria do Produto</h5>
+            <h5><?= $product['category']; ?></h5>
           </div>
           <div class="py-3">
             <p>Descrição</p>
-            <h5>#Descrição do Produto</h5>
+            <h5><?= $product['description']; ?></h5>
           </div>
           <div class="row no-gutters justify-content-between py-3">
             <div>
               <p>Quantidade em Estoque</p>
-              <h5>#Qtd</h5>
+              <h5><?= $product['quantity']; ?></h5>
             </div>
             <div>
               <p>Preço</p>
-              <h5>#R$</h5>
+              <h5><?= $product['price']; ?></h5>
             </div>
           </div>
           <div>

@@ -7,7 +7,7 @@
   // exit;
 
   // var_dump($_SESSION);
-  var_dump($_SESSION['products']);
+  // var_dump($_SESSION['products']);
 
 
   // Criando função para acrescentar novos produtos numa session. Entra com 
@@ -51,7 +51,8 @@
     //Movendo imagem para pasta do projeto:
     $imgName = $_FILES['productImage']['name'];
     $tmpPath = $_FILES['productImage']['tmp_name'];
-    $imgPath = dirname(__FILE__)."/productsImgs/".$imgName;
+    $imgPath = "productsImgs/".$imgName;
+    // $imgPath = dirname(__FILE__)."/productsImgs/".$imgName;
 
     $moveFile = move_uploaded_file($tmpPath, $imgPath);
 
