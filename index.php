@@ -74,24 +74,29 @@
 </head>
 <body>
   <main class="container-fluid">
-    <div class="row d-flex justify-content-around">
+    <div class="row d-flex justify-content-center">
+
       <!-- Tabela de Produtos Cadastrados  -->
-      <div class="col-6">
+      <div class="col-7 products-table mt-5 mx-3">
         <h2>Todos os Produtos Cadastrados</h2>
          <?php if(isset($_SESSION['products'])){ ?>
-          <table>
-            <tr>
-              <th>Nome</th>
-              <th>Categoria</th>
-              <th>Preço</th>
-            </tr>
-            <?php foreach($_SESSION['products'] as $row){ ?>
-            <tr>
-              <td><a href="productPage.php?productID=<?= $row['id']; ?>"><?= $row["name"]; ?></a></td>
-              <td><?= $row["category"]; ?></td>
-              <td><?= $row["price"]; ?></td>
-            </tr>
-            <?php } ?>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Preço</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($_SESSION['products'] as $row){ ?>
+              <tr>
+                <td><a href="productPage.php?productID=<?= $row['id']; ?>"><?= $row["name"]; ?></a></td>
+                <td><?= $row["category"]; ?></td>
+                <td><?= 'R$ '.$row["price"]; ?></td>
+              </tr>
+              <?php } ?>
+            </tbody>
           </table> 
         <?php } ?>
       </div>

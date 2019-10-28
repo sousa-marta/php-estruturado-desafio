@@ -15,10 +15,10 @@
 /* PRODUCT PAGE */
 
 .product-page {
-    background-color:  #f8f9fa;
+    background-color:  #dbdbdb;
+    margin-top:2rem;
 }
 
 .product-image {
-    height: 100px; 
-    width:100px;
+    width:100%;
 }

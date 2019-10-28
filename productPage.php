@@ -3,16 +3,14 @@
   
   //Checando se está recebendo a informação do _GET corretamente:
   // var_dump($_GET);
-  var_dump($_SESSION['products']);
+  // var_dump($_SESSION['products']);
 
   //Pegando o valor do ID do produto recebido:
   $productID = $_GET['productID'];
   // var_dump($_GET);
 
-  // ESTÁ RETORNANDO FALSE.... :( ------------------>
-
   //Função para pegar a array respectiva ao ID recebido via GET:
-  function productGet($productID){
+  function getProduct($productID){
     foreach ($_SESSION['products'] as $product) {
       if($product['id'] == $productID){
         return $product;
@@ -21,8 +19,8 @@
   }
 
   //Rodando a função e recebendo a array:
-  $product = productGet($productID);
-  var_dump($product);
+  $product = getProduct($productID);
+  // var_dump($product);
 
 ?>
 
@@ -37,18 +35,24 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="product-page">
-  <main class="container-fluid">
+<body>
+  <main class="container product-page">
+
+    <!-- Botão para voltar para a lista de produtos -->
     <div>
-      <a href="index.php">Voltar para a lista de produtos</a>
+      <a href="index.php" class="btn btn-light mt-3">Voltar para a lista de produtos</a>
     </div>
-    <div>
+    
+    <div class="p-4">
       <div class="row justify-content-between">
+        
+        <!-- Imagem do Produto -->
         <section class="col-4">
-          <img src="<?= $product['image']; ?>" alt=""  class="product-image">
+          <img src="<?= $product['image']; ?>" alt=""  class="product-image mt-3">
         </section>
 
-        <section class="col-8 d-flex flex-column align-items-start">
+        <!-- Informações Sobre o Produto -->
+        <section class="col-8 d-flex flex-column">
           <h1><?= $product['name']; ?></h1>
           <div class="py-3">
             <p>Categoria</p>
@@ -58,21 +62,19 @@
             <p>Descrição</p>
             <h5><?= $product['description']; ?></h5>
           </div>
-          <div class="row no-gutters justify-content-between py-3">
-            <div>
+          <div class="row py-3">
+            <div class="col">
               <p>Quantidade em Estoque</p>
-              <h5><?= $product['quantity']; ?></h5>
+              <h5><?= $product['quantity'].' unidades'; ?></h5>
             </div>
-            <div>
+            <div class="col">
               <p>Preço</p>
-              <h5><?= $product['price']; ?></h5>
+              <h5><?= 'R$ '.$product['price']; ?></h5>
             </div>
           </div>
-          <div>
-            <a href="#">Excluir Produto</a>
-            <br>
-            
-            <a href="#">Editar</a>
+          <div class="d-flex justify-content-end">
+            <a href="#" class="btn btn-primary">Editar</a>
+            <a href="#" class="btn btn-danger ml-5">Excluir Produto</a>
           </div>
         </section>
       </div>
