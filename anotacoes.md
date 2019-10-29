@@ -1,11 +1,5 @@
 DÚVIDAS:
-1. função para pegar array respectiva ao id recebido na página do produto;
-2. que função vou usar para alterar array..?
-
-
-
-
-
+1. que função vou usar para alterar array..?
 
 
 
@@ -20,10 +14,8 @@ MELHORIAS NO CÓDIGO:
 - criar uma página para funções;
 
 VISUAL:
-- colocar linha entre produtos impressos;
 
 GITHUB:
-- depois que ter certeza que a branch fez o merge certinho, deletar a branch session
 
 FUNÇÃO EXCLUIR:
 - usar unset para excluir:
@@ -33,6 +25,7 @@ session(start);
 
 unset($_SESSION['products']['1'];
 var_dump($_SESSION);
+https://stackoverflow.com/questions/369602/deleting-an-element-from-an-array-in-php
 
 FUNÇÃO EDITAR:
 https://www.php.net/manual/pt_BR/function.array-splice.php
