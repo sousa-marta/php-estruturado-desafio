@@ -41,7 +41,7 @@
       if(!$_SESSION['products']){
         return "Não foi possível cadastrar o produto corretamente";
       }else {
-        return "O produto foi adicionado no cadastro corretamente";
+        return "O produto foi adicionado ao cadastro corretamente";
       }
     }
   }

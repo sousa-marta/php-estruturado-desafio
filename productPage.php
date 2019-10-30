@@ -74,8 +74,8 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-            <a href="#" class="btn btn-primary">Editar</a>
-            <a href="delete.php?productID=<?= $productID; ?>" class="btn btn-danger ml-5">Excluir Produto</a>
+            <a href="editProduct.php?productID=<?= $productID; ?>" class="btn btn-primary">Editar</a>
+            <a href="deleteProduct.php?productID=<?= $productID; ?>" class="btn btn-danger ml-5">Excluir Produto</a>
           </div>
         </section>
       </div>
