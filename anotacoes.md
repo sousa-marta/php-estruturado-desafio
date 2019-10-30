@@ -1,5 +1,5 @@
 DÚVIDAS:
-1. que função vou usar para alterar array..?
+1. função deletar bugada;
 
 
 

@@ -6,6 +6,23 @@
   $productID = $_GET['productID'];
   // var_dump($_GET);
 
+  //Pegando array de lista de produtos da Session:
+  $products = $_SESSION['products'];
+  // var_dump($products);
+
+  //Pegando array do produto:
+  function getArrayProduct ($productID,$products){
+    foreach ($products as $product) {
+      if ($productID == $product['id']) {
+        return $product;
+      }
+    }
+  }
+  
+  $productArray = getArrayProduct($productID,$products);
+  var_dump($productArray);
+  
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +45,7 @@
       <h1>Editar Produto</h1>
       <div class="form-group">
         <label for="productName">Nome</label>
-        <input type="text" name="productName" class="form-control" id="productName" required placeholder="Insira o nome do produto">
+        <input type="text" name="productName" class="form-control" id="productName" value="<?= lindo ?>">
       </div>
       <div class="form-group">
         <label for="productCategory">Categoria</label>
@@ -43,8 +60,7 @@
       </div>
       <div class="form-group">
         <label for="productDescription">Descrição</label>
-        <textarea class="form-control" name="productDescription" id="productDescription" cols="30" rows="3"
-          required></textarea>
+        <textarea class="form-control" name="productDescription" id="productDescription" cols="30" rows="3"></textarea>
       </div>
       <div class="form-group">
         <label for="productQuantity">Quantidade</label>
