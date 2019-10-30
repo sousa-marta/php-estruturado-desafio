@@ -22,6 +22,7 @@
   $product = getProduct($productID);
   // var_dump($product);
 
+
 ?>
 
 
@@ -74,7 +75,7 @@
           </div>
           <div class="d-flex justify-content-end">
             <a href="#" class="btn btn-primary">Editar</a>
-            <a href="#" class="btn btn-danger ml-5">Excluir Produto</a>
+            <a href="delete.php?productID=<?= $productID; ?>" class="btn btn-danger ml-5">Excluir Produto</a>
           </div>
         </section>
       </div>
