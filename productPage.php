@@ -41,7 +41,7 @@
 
     <!-- Botão para voltar para a lista de produtos -->
     <div>
-      <a href="index.php" class="btn btn-light mt-3">Voltar para a lista de produtos</a>
+      <a href="index.php" class="btn btn-light mt-3">&#8678 Voltar para a lista de produtos</a>
     </div>
     
     <div class="p-4">
