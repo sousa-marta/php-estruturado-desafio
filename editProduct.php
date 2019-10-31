@@ -4,11 +4,11 @@
 
   //Pegando o valor do ID do produto recebido:
   $productID = $_GET['productID'];
-  // var_dump($_GET);
+  var_dump($_GET);
 
   //Pegando array de lista de produtos da Session:
   $products = $_SESSION['products'];
-  // var_dump($products);
+  var_dump($products);
 
   //Pegando array do produto:
   function getArrayProduct ($productID,$products){
@@ -23,10 +23,27 @@
   $productArray = getArrayProduct($productID,$products);
   // var_dump($productArray);
 
-  //Pegar via GET os novos valores enviados pela pessoa. 
-  // $editedProduct = $_GET;
-  var_dump($_GET);
+  //Pegar via POST os novos valores enviados pela pessoa. 
+  $editedProduct = $_POST;
+  var_dump($_POST);
   
+  function editProduct($productID,$products,$editedProduct){
+    foreach ($products as $product) {
+      if($product['id'] == $productID){
+        array_splice($product,0,count($product),$editedProduct);
+
+        //Atualizando a Array para essa nova Session:
+        $_SESSION['products'] = $product;
+
+        // header("Location: index.php");
+      }
+    }
+  }
+
+  if(isset($_POST)){
+    editProduct($productID,$products,$editedProduct);
+  };
+
   
   
   //parte de mover fotos se repete
