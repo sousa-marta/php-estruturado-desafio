@@ -60,6 +60,8 @@
     echo addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath);
   }
 
+var_dump($_SESSION['products']);
+
 ?>
 
 <!DOCTYPE html>

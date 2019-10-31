@@ -18,62 +18,20 @@
       }
     }
   }
-  
+
+  //Pegando array do produto para preencher o formulário com os dados anteriores:
   $productArray = getArrayProduct($productID,$products);
-  var_dump($productArray);
+  // var_dump($productArray);
 
-  //pegar via get os novos valores enviados pela pessoa. parte de mover fotos se repete
+  //Pegar via GET os novos valores enviados pela pessoa. 
+  // $editedProduct = $_GET;
+  var_dump($_GET);
+  
+  
+  
+  //parte de mover fotos se repete
 
-// Criando função para acrescentar novos produtos numa session. Entra com 
-  function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
-    //Se ainda não teve nenhum produto adicionado:
-    if(!isset($_SESSION['products'])){
-      $_SESSION['products'] = [];
 
-      //Criando primeiro ID da lista:
-      $id = 1;
-
-      $_SESSION['products'][] = ['id' => $id, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
-
-      //Validação para verificar se o arquivo foi adicionado corretamente:
-      if(!$_SESSION['products']){
-        return "Não foi possível cadastrar o produto corretamente";
-      }else {
-        return "O produto foi adicionado no cadastro corretamente";
-      }
-
-    //Se já tem um produto adicionado:
-    }else {
-      //Pegando posição na array do último ID (conta quantos elementos tem no array e descresce de 1 para pegar a posição real):
-      $idLastPosition = count($_SESSION['products'])-1; 
-
-      //Pega o valor do ID da última posição e acrescenta um para colocar na array produtos:
-      $idLast = $_SESSION['products'][$idLastPosition]['id']+1;
-
-      $_SESSION['products'][] = ['id' => $idLast, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
-      //Validação para verificar se o arquivo foi adicionado corretamente:
-      if(!$_SESSION['products']){
-        return "Não foi possível cadastrar o produto corretamente";
-      }else {
-        return "O produto foi adicionado ao cadastro corretamente";
-        // header("Location: index.php");
-      }
-    }
-  }
-    
-  //CADASTRO DE PRODUTO:
-  if($_POST){
-    //Movendo imagem para pasta do projeto:
-    $imgName = $_FILES['productImage']['name'];
-    $tmpPath = $_FILES['productImage']['tmp_name'];
-    $imgPath = "productsImgs/".$imgName;
-    // $imgPath = dirname(__FILE__)."/productsImgs/".$imgName;
-
-    $moveFile = move_uploaded_file($tmpPath, $imgPath);
-
-    //Chamando a função para salvar o arquivo na session:
-    echo addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath);
-  }
 
 
 ?>
