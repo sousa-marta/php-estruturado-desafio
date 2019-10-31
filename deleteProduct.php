@@ -22,6 +22,9 @@ function deleteProduct($productID,$products){
       
       unset($products[$position]); //aqui exclui;
 
+      //Atualizando a Array para essa nova Session:
+      $_SESSION['products'] = $products;
+
       echo '<pre>';
       var_dump($products);
 
@@ -32,7 +35,7 @@ function deleteProduct($productID,$products){
       // $products = array_values($products);
       // echo "sucesso";
       
-      // header("Location: index.php");
+      header("Location: index.php");
     }
   }
 }
