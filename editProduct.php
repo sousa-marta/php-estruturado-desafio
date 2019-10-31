@@ -126,7 +126,7 @@
       <div class="form-group row">
         <label for="productImage">Foto do Produto</label>
         <img src="<?= $productArray['image'] ?>" alt="" class="col-6">
-        <input type="file" name="productImage" id="productImage" value="<?= $productArray['image'] ?>" required>
+        <input type="file" name="productImage" id="productImage" value="<?= $productArray['image'] ?>">
       </div>
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">Enviar</button>

@@ -1,5 +1,7 @@
 DÚVIDAS:
 1. função deletar bugada;
+2. quando não escolho foto para o produto, ela fica em branco, não salva a anterior;
+3. depois de página alterada não está voltando para index;
 
 
 
