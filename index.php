@@ -2,10 +2,6 @@
   //Incluindo variáveis.php que já contém session_start:
   require("variables.php");
 
-  // Para resetar a session products
-  // unset($_SESSION['products']);
-  // exit;
-
   // var_dump($_SESSION);
   // var_dump($_SESSION['products']);
 
@@ -60,7 +56,7 @@
     echo addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath);
   }
 
-var_dump($_SESSION['products']);
+// var_dump($_SESSION['products']);
 
 ?>
 

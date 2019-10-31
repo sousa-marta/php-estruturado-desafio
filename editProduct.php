@@ -2,14 +2,6 @@
 
   include('variables.php');
 
-  //Pegando o valor do ID do produto recebido:
-  $productID = $_GET['productID'];
-  var_dump($_GET);
-
-  //Pegando array de lista de produtos da Session:
-  $products = $_SESSION['products'];
-  var_dump($products);
-
   //Pegando array do produto:
   function getArrayProduct ($productID,$products){
     foreach ($products as $product) {
@@ -22,25 +14,39 @@
   //Pegando array do produto para preencher o formulário com os dados anteriores:
   $productArray = getArrayProduct($productID,$products);
   // var_dump($productArray);
-
-  //Pegar via POST os novos valores enviados pela pessoa. 
-  $editedProduct = $_POST;
-  var_dump($_POST);
-  
+ 
   function editProduct($productID,$products,$editedProduct){
     foreach ($products as $product) {
       if($product['id'] == $productID){
-        array_splice($product,0,count($product),$editedProduct);
+
+        //Procura a posição referente ao ID do produto:
+        $position = array_search($product,$products);
+
+        //Substituindo a partir da posição 1 (não quero substituir o ID):
+        array_splice($product,1,count($product),$editedProduct);
 
         //Atualizando a Array para essa nova Session:
-        $_SESSION['products'] = $product;
+        $_SESSION['products'][$position] = $product;
 
-        // header("Location: index.php");
+        header("Location: index.php");
       }
     }
   }
 
+  //Pegando o valor do ID do produto recebido:
+  $productID = $_GET['productID'];
+  var_dump($_GET);
+
+  //Pegando array de lista de produtos da Session:
+  $products = $_SESSION['products'];
+  var_dump($products);
+  
   if(isset($_POST)){
+    //Pegar via POST os novos valores enviados pela pessoa. 
+    $editedProduct = $_POST;
+    var_dump($_POST);
+
+    //Alterando dados do produto:
     editProduct($productID,$products,$editedProduct);
   };
 
