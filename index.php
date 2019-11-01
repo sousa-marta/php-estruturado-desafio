@@ -77,7 +77,7 @@
       <!-- Tabela de Produtos Cadastrados  -->
       <div class="col-7 products-table mt-5 mx-3">
         <h2>Todos os Produtos Cadastrados</h2>
-         <?php if(isset($_SESSION['products'])){ ?>
+         <?php if(isset($_SESSION['products'])){ var_dump($_SESSION); ?>
           <table class="table table-hover">
             <thead>
               <tr>
