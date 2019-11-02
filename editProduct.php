@@ -61,9 +61,16 @@ if($_POST) {
         <label for="productCategory">Categoria</label>
         <!-- Categoria de produtos dinâmica -->
         <select class="form-control" name="category" id="productCategory">
-          <?php
-            foreach ($_SESSION['productCategoryList'] as $category) { ?>
-            <option value="<?= $category ?>"><?= $category ?></option>    
+          <?php foreach ($_SESSION['productCategoryList'] as $category) {
+              if ($currentProduct['category'] == $category){ ?>
+                <option value="<?= $category; ?>" selected>
+                  <?= $category; ?>
+                </option>
+              <?php }else { ?>
+                <option value="<?= $category ?>">
+                  <?= $category; ?>
+                </option> 
+              <?php } ?>
           <?php } ?>
         </select>
       </div>

@@ -102,7 +102,9 @@
             <option value="select" selected disabled>Selecione uma categoria</option>
             <?php
               foreach ($_SESSION['productCategoryList'] as $category) { ?>
-              <option value="<?= $category ?>"><?= $category ?></option>    
+              <option value="<?= $category ?>">
+                <?= $category ?>
+              </option>    
             <?php } ?>
           </select>
         </div>
