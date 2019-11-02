@@ -6,22 +6,12 @@
   // var_dump($_SESSION['products']);
 
   //Pegando o valor do ID do produto recebido:
-  $productID = $_GET['productID'];
-  // var_dump($_GET);
+  $id = $_GET['id'];
+  // var_dump($id);
 
-  //Função para pegar a array respectiva ao ID recebido via GET:
-  function getProduct($productID){
-    foreach ($_SESSION['products'] as $product) {
-      if($product['id'] == $productID){
-        return $product;
-      }
-    }
-  }
-
-  //Rodando a função e recebendo a array:
-  $product = getProduct($productID);
-  // var_dump($product);
-
+  //Array de dados do ID recebido via GET:
+  $product = $_SESSION['products'][$id];
+  var_dump($product);
 
 ?>
 
