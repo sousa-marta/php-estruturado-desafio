@@ -3,8 +3,6 @@
   require("variables.php");
 
   var_dump($_SESSION);
-  // var_dump($_SESSION['products']);
-
 
   // Criando função para acrescentar novos produtos numa session. Entra com 
   function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
@@ -12,10 +10,7 @@
     if(!isset($_SESSION['products'])){
       $_SESSION['products'] = [];
 
-      //Criando primeiro ID da lista:
-      $id = 1;
-
-      $_SESSION['products'][] = ['id' => $id, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
 
       //Validação para verificar se o arquivo foi adicionado corretamente:
       if(!$_SESSION['products']){
@@ -26,13 +21,7 @@
 
     //Se já tem um produto adicionado:
     }else {
-      //Pegando posição na array do último ID (conta quantos elementos tem no array e descresce de 1 para pegar a posição real):
-      $idLastPosition = count($_SESSION['products'])-1; 
-
-      //Pega o valor do ID da última posição e acrescenta um para colocar na array produtos:
-      $idLast = $_SESSION['products'][$idLastPosition]['id']+1;
-
-      $_SESSION['products'][] = ['id' => $idLast, 'name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
+      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
       //Validação para verificar se o arquivo foi adicionado corretamente:
       if(!$_SESSION['products']){
         return "Não foi possível cadastrar o produto corretamente";
@@ -45,8 +34,8 @@
   //CADASTRO DE PRODUTO:
   if($_POST){
     //Movendo imagem para pasta do projeto:
-    $imgName = $_FILES['productImage']['name'];
-    $tmpPath = $_FILES['productImage']['tmp_name'];
+    $imgName = $_FILES['image']['name'];
+    $tmpPath = $_FILES['image']['tmp_name'];
     $imgPath = "productsImgs/".$imgName;
     // $imgPath = dirname(__FILE__)."/productsImgs/".$imgName;
 
@@ -85,16 +74,18 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach($_SESSION['products'] as $row){ ?>
-              <tr>
-                <td><a href="productPage.php?productID=<?= $row['id']; ?>"><?= $row["name"]; ?></a></td>
-                <td><?= $row["category"]; ?></td>
-                <td><?= 'R$ '.$row["price"]; ?></td>
-              </tr>
+              <?php if(isset($_SESSION['products'])){
+                foreach ($_SESSION['products'] as $key => $product) { ?>
+                  <tr>
+                    <td><a href="productPage.php?id=<?= $key ?>"><?= $product['name']; ?></a></td>
+                    <td><?= $product['category']; ?></td>
+                    <td><?= 'R$ '.$product['price']; ?></td>
+                  </tr>
               <?php } ?>
             </tbody>
           </table> 
         <?php } ?>
+      <?php } ?>
       </div>
 
       <!-- Formulário de Cadastro de Produtos -->
@@ -102,12 +93,12 @@
         <h1>Cadastrar Produtos</h1>
         <div class="form-group">
           <label for="productName">Nome</label>
-          <input type="text" name="productName" class="form-control" id="productName" required placeholder="Insira o nome do produto">
+          <input type="text" name="name" class="form-control" id="productName" required placeholder="Insira o nome do produto">
         </div>
         <div class="form-group">
           <label for="productCategory">Categoria</label>
           <!-- Categoria de produtos dinâmica -->
-          <select class="form-control" name="productCategory" id="productCategory">
+          <select class="form-control" name="category" id="productCategory">
             <option value="select" selected disabled>Selecione uma categoria</option>
             <?php
               foreach ($_SESSION['productCategoryList'] as $category) { ?>
@@ -117,20 +108,20 @@
         </div>
         <div class="form-group">
           <label for="productDescription">Descrição</label>
-          <textarea class="form-control" name="productDescription" id="productDescription" cols="30" rows="3"
+          <textarea class="form-control" name="description" id="productDescription" cols="30" rows="3"
             required></textarea>
         </div>
         <div class="form-group">
           <label for="productQuantity">Quantidade</label>
-          <input type="number" name="productQuantity" class="form-control" id="productQuantity" placeholder="Insira a quantidade de produtos em estoque" required>
+          <input type="number" name="quantity" class="form-control" id="productQuantity" placeholder="Insira a quantidade de produtos em estoque" required>
         </div>
         <div class="form-group">
           <label for="productPrice">Preço</label>
-          <input type="number" name="productPrice" id="productPrice" class="form-control" required>
+          <input type="number" name="price" id="productPrice" class="form-control" required>
         </div>
         <div class="form-group">
           <label for="productImage">Foto do Produto</label>
-          <input type="file" name="productImage" id="productImage" required>
+          <input type="file" name="image" id="productImage" required>
         </div>
         <div class="d-flex justify-content-end">
           <button type="submit" class="btn btn-primary">Enviar</button>
