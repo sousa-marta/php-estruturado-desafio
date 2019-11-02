@@ -2,7 +2,7 @@
   //Incluindo variáveis.php que já contém session_start:
   require("variables.php");
 
-  // var_dump($_SESSION);
+  var_dump($_SESSION);
   // var_dump($_SESSION['products']);
 
 
@@ -56,8 +56,6 @@
     echo addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath);
   }
 
-// var_dump($_SESSION['products']);
-
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +75,7 @@
       <!-- Tabela de Produtos Cadastrados  -->
       <div class="col-7 products-table mt-5 mx-3">
         <h2>Todos os Produtos Cadastrados</h2>
-         <?php if(isset($_SESSION['products'])){ var_dump($_SESSION); ?>
+         <?php if(isset($_SESSION['products'])){ ?>
           <table class="table table-hover">
             <thead>
               <tr>

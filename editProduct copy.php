@@ -1,59 +1,25 @@
 <?php 
 
   include('variables.php');
-  var_dump($_SESSION['products']); 
-  
-  //Pegando array do ID do produto recebido via GET:
-  function getArrayProduct ($productID,$products){
-    foreach ($products as $product) {
-      if ($productID == $product['id']) {
-        return $product;
-      }
-    }
-  }
-
-  //Pegando o valor do ID do produto recebido:
-  $productID = $_GET['productID'];
-  var_dump($_GET);
-
-  //Pegando array de lista de produtos da Session:
-  $products = $_SESSION['products'];
-  // var_dump($products);
-
-  //Pegando array do produto para preencher o formulário com os dados anteriores:
-  $productArray = getArrayProduct($productID,$products);
-  var_dump($productArray);
- 
-  function editProduct($productID,$products,$editedProduct){
-    foreach ($products as $product) {
-      if($product['id'] == $productID){
-
-        //Procura a posição referente ao ID do produto:
-        $position = array_search($product,$products);
-        var_dump($position);
-
-        $newInfo = array_splice($product,1,6,$editedProduct);
-        var_dump($newInfo);
-        exit;
-
-        //Atualizando a Array para essa nova Session:
-        $_SESSION['products'][$position] = $newInfo;
-  
-        //header("Location: index.php");
-      }
-    }
-  }
   
   if(isset($_POST)){
-    //Pegar via POST os novos valores enviados pela pessoa (não trás ID do produto). 
-    $editedProduct = $_POST;
-    var_dump($_POST);
+    $productID = $_POST['id'];
 
-    //Alterando dados do produto:
-    editProduct($productID,$products,$editedProduct);
-  };
+    $editedProduct = $_POST;
+    // var_dump($editedProduct);
+
+    //Alterando dados que foram alterados:
+    foreach ($_SESSION['products'][$productID] as $key => $value){
+      if($key!="img"){
+        if($value != $editedProduct[$key]){
+          $_SESSION['products'][$productID][$key] = $editedProduct[$key];
+        }
+      }
+    }
+  }
+
   
-  //parte de mover fotos se repete
+
 
 
 ?>
@@ -75,6 +41,8 @@
   <!-- Formulário de Alteração de Produtos (post para a própria página)-->
   <div class="row justify-content-center">
     <form class="col-4 form-input" method="post" action="" enctype="multipart/form-data">
+      <!-- Informações para salvar o ID do produto: -->
+      <input type="hidden" name="id" value="<?= $productID ?>">
       <h1>Editar Produto</h1>
       <div class="form-group">
         <label for="productName">Nome</label>
