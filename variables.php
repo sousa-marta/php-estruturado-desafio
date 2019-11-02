@@ -3,12 +3,7 @@
   session_start();
 
   // Lista de Categorias Possíveis:
-  $_SESSION['productCategoryList'] = ["Acessórios", "Camisetas", "Calças", "Vestidos", "Saias",];
-
-  $orderedCategories = ["Saias","Acessórios", "Camisetas", "Calças", "Vestidos"];
-  sort($orderedCategories);
-  var_dump($orderedCategories);
-
+  $_SESSION['productCategoryList'] = ["Acessórios", "Calças", "Camisetas", "Saias", "Vestidos"];
 
   // Atribuindo os valores lançados no formulário/input às variáveis 
   if($_POST != []){
