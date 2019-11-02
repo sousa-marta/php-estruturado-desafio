@@ -11,7 +11,7 @@
 
   //Array de dados do ID recebido via GET:
   $product = $_SESSION['products'][$id];
-  var_dump($product);
+  // var_dump($product);
 
 ?>
 

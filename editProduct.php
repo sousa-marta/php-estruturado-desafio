@@ -1,59 +1,36 @@
-<?php 
+<?php
 
-  include('variables.php');
-  var_dump($_SESSION['products']); 
-  
-  //Pegando array do ID do produto recebido via GET:
-  function getArrayProduct ($productID,$products){
-    foreach ($products as $product) {
-      if ($productID == $product['id']) {
-        return $product;
-      }
+require("variables.php"); 
+
+//Pegando o valor do ID do produto recebido:
+$id = $_GET['id'];
+
+//Array de produtos do ID recebido atual:
+$currentProduct = $_SESSION['products'][$id];
+
+function editProduct ($currentProduct,$editedProduct,$id){
+  foreach ($currentProduct as $key=>$value) {
+    if ($value != $editedProduct[$key]){
+      $_SESSION['products'][$id][$key] = $editedProduct[$key];
     }
   }
+}
 
+if($_POST) {
   //Pegando o valor do ID do produto recebido:
-  $productID = $_GET['productID'];
-  var_dump($_GET);
+  $id = $_GET['id'];
 
-  //Pegando array de lista de produtos da Session:
-  $products = $_SESSION['products'];
-  // var_dump($products);
+  //Array de produtos do ID recebido atual:
+  $currentProduct = $_SESSION['products'][$id];
 
-  //Pegando array do produto para preencher o formulário com os dados anteriores:
-  $productArray = getArrayProduct($productID,$products);
-  var_dump($productArray);
- 
-  function editProduct($productID,$products,$editedProduct){
-    foreach ($products as $product) {
-      if($product['id'] == $productID){
+  //Array de produtos recebido via GET:
+  $editedProduct = $_POST;
 
-        //Procura a posição referente ao ID do produto:
-        $position = array_search($product,$products);
-        var_dump($position);
+  //Executando a função de alteração de produto
+  editProduct($currentProduct,$editedProduct,$id);
 
-        $newInfo = array_splice($product,1,6,$editedProduct);
-        var_dump($newInfo);
-        exit;
-
-        //Atualizando a Array para essa nova Session:
-        $_SESSION['products'][$position] = $newInfo;
-  
-        //header("Location: index.php");
-      }
-    }
-  }
-  
-  if(isset($_POST)){
-    //Pegar via POST os novos valores enviados pela pessoa (não trás ID do produto). 
-    $editedProduct = $_POST;
-    var_dump($_POST);
-
-    //Alterando dados do produto:
-    editProduct($productID,$products,$editedProduct);
-  };
-  
-  //parte de mover fotos se repete
+  header("Location: index.php");
+}
 
 
 ?>
@@ -78,12 +55,12 @@
       <h1>Editar Produto</h1>
       <div class="form-group">
         <label for="productName">Nome</label>
-        <input type="text" name="productName" class="form-control" id="productName" required value="<?= $productArray['name'] ?>">
+        <input type="text" name="name" class="form-control" id="productName" required value="<?= $currentProduct['name'] ?>">
       </div>
       <div class="form-group">
         <label for="productCategory">Categoria</label>
         <!-- Categoria de produtos dinâmica -->
-        <select class="form-control" name="productCategory" id="productCategory">
+        <select class="form-control" name="category" id="productCategory">
           <?php
             foreach ($_SESSION['productCategoryList'] as $category) { ?>
             <option value="<?= $category ?>"><?= $category ?></option>    
@@ -92,20 +69,20 @@
       </div>
       <div class="form-group">
         <label for="productDescription">Descrição</label>
-        <textarea class="form-control" name="productDescription" id="productDescription" cols="30" rows="3" value="<?= $productArray['description'] ?>" required><?= $productArray['description'] ?></textarea>
+        <textarea class="form-control" name="description" id="productDescription" cols="30" rows="3" value="<?= $currentProduct['description'] ?>" required><?= $currentProduct['description'] ?></textarea>
       </div>
       <div class="form-group">
         <label for="productQuantity">Quantidade</label>
-        <input type="number" name="productQuantity" class="form-control" id="productQuantity" placeholder="Insira a quantidade de produtos em estoque" value="<?= $productArray['quantity'] ?>" required>
+        <input type="number" name="quantity" class="form-control" id="productQuantity" placeholder="Insira a quantidade de produtos em estoque" value="<?= $currentProduct['quantity'] ?>" required>
       </div>
       <div class="form-group">
         <label for="productPrice">Preço</label>
-        <input type="number" name="productPrice" id="productPrice" class="form-control" value="<?= $productArray['price'] ?>" required>
+        <input type="number" name="price" id="productPrice" class="form-control" value="<?= $currentProduct['price'] ?>" required>
       </div>
       <div class="form-group row">
         <label for="productImage">Foto do Produto</label>
-        <img src="<?= $productArray['image'] ?>" alt="" class="col-6">
-        <input type="file" name="productImage" id="productImage" value="<?= $productArray['image'] ?>">
+        <img src="<?= $currentProduct['image'] ?>" alt="" class="col-6">
+        <input type="file" name="img" id="productImage" value="<?= $currentProduct['image'] ?>">
       </div>
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">Enviar</button>

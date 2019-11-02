@@ -21,10 +21,9 @@ function deleteProduct($id,$products){
 
 //Pegando o valor do ID do produto recebido:
 $id = $_GET['id'];
-// var_dump($productID);
 
+//Array de produtos:
 $products = $_SESSION['products'];
-// var_dump($products);
 
 //Executando função para deletar:
 deleteProduct($id, $products);

@@ -62,7 +62,7 @@
     <div class="row d-flex justify-content-center">
 
       <!-- Tabela de Produtos Cadastrados  -->
-      <div class="col-7 products-table mt-5 mx-3">
+      <div class="col-6 products-table mt-5 mr-3">
         <h2>Todos os Produtos Cadastrados</h2>
          <?php if(isset($_SESSION['products'])){ ?>
           <table class="table table-hover">
@@ -89,7 +89,7 @@
       </div>
 
       <!-- Formulário de Cadastro de Produtos -->
-      <form class="col-4 form-input" method="post" action="" enctype="multipart/form-data">
+      <form class="col-4 form-input ml-4" method="post" action="" enctype="multipart/form-data">
         <h1>Cadastrar Produtos</h1>
         <div class="form-group">
           <label for="productName">Nome</label>
