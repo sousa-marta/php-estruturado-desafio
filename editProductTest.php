@@ -1,7 +1,12 @@
 <?php 
 
   include('variables.php');
-  
+
+  $productValueID = $_GET['productID'];
+  $productID = $productValueID -1;
+  var_dump($productID);
+  exit;
+ 
   if(isset($_POST)){
     $productID = $_POST['id'];
 
@@ -17,9 +22,6 @@
       }
     }
   }
-
-  
-
 
 
 ?>
@@ -46,12 +48,12 @@
       <h1>Editar Produto</h1>
       <div class="form-group">
         <label for="productName">Nome</label>
-        <input type="text" name="productName" class="form-control" id="productName" required value="<?= $productArray['name'] ?>">
+        <input type="text" name="name" class="form-control" id="productName" required value="<?= $productArray['name'] ?>">
       </div>
       <div class="form-group">
         <label for="productCategory">Categoria</label>
         <!-- Categoria de produtos dinâmica -->
-        <select class="form-control" name="productCategory" id="productCategory">
+        <select class="form-control" name="category" id="productCategory">
           <?php
             foreach ($_SESSION['productCategoryList'] as $category) { ?>
             <option value="<?= $category ?>"><?= $category ?></option>    
@@ -60,20 +62,20 @@
       </div>
       <div class="form-group">
         <label for="productDescription">Descrição</label>
-        <textarea class="form-control" name="productDescription" id="productDescription" cols="30" rows="3" value="<?= $productArray['description'] ?>" required><?= $productArray['description'] ?></textarea>
+        <textarea class="form-control" name="description" id="productDescription" cols="30" rows="3" value="<?= $productArray['description'] ?>" required><?= $productArray['description'] ?></textarea>
       </div>
       <div class="form-group">
         <label for="productQuantity">Quantidade</label>
-        <input type="number" name="productQuantity" class="form-control" id="productQuantity" placeholder="Insira a quantidade de produtos em estoque" value="<?= $productArray['quantity'] ?>" required>
+        <input type="number" name="quantity" class="form-control" id="productQuantity" placeholder="Insira a quantidade de produtos em estoque" value="<?= $productArray['quantity'] ?>" required>
       </div>
       <div class="form-group">
         <label for="productPrice">Preço</label>
-        <input type="number" name="productPrice" id="productPrice" class="form-control" value="<?= $productArray['price'] ?>" required>
+        <input type="number" name="price" id="productPrice" class="form-control" value="<?= $productArray['price'] ?>" required>
       </div>
       <div class="form-group row">
         <label for="productImage">Foto do Produto</label>
         <img src="<?= $productArray['image'] ?>" alt="" class="col-6">
-        <input type="file" name="productImage" id="productImage" value="<?= $productArray['image'] ?>">
+        <input type="file" name="img" id="productImage" value="<?= $productArray['image'] ?>">
       </div>
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">Enviar</button>
