@@ -1,41 +1,13 @@
 <?php
-  //Incluindo variáveis.php que já contém session_start:
-  require("variables.php");
-
-  // Criando função para acrescentar novos produtos numa session. Entra com 
-  function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
-    //Se ainda não teve nenhum produto adicionado:
-    if(!isset($_SESSION['products'])){
-      $_SESSION['products'] = [];
-
-      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
-
-      //Validação para verificar se o arquivo foi adicionado corretamente:
-      if(!$_SESSION['products']){
-        return "Não foi possível cadastrar o produto corretamente";
-      }else {
-        return "O produto foi adicionado no cadastro corretamente";
-      }
-
-    //Se já tem um produto adicionado:
-    }else {
-      $_SESSION['products'][] = ['name' => $productName, 'category' => $productCategory, 'description' => $productDescription, 'quantity' => $productQuantity, 'price' => $productPrice, 'image' => $imgPath];
-      //Validação para verificar se o arquivo foi adicionado corretamente:
-      if(!$_SESSION['products']){
-        return "Não foi possível cadastrar o produto corretamente";
-      }else {
-        return "O produto foi adicionado ao cadastro corretamente";
-      }
-    }
-  }
-    
+  //Incluindo functions.php que inclue variáveis.php que já contém session_start:
+  require_once("config/functions.php");
+ 
   //CADASTRO DE PRODUTO:
   if($_POST){
     //Movendo imagem para pasta do projeto:
     $imgName = $_FILES['image']['name'];
     $tmpPath = $_FILES['image']['tmp_name'];
     $imgPath = "productsImgs/".$imgName;
-    // $imgPath = dirname(__FILE__)."/productsImgs/".$imgName;
 
     $moveFile = move_uploaded_file($tmpPath, $imgPath);
 

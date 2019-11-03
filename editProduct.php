@@ -1,24 +1,12 @@
 <?php
 
-require("variables.php"); 
+require_once("config/functions.php");
 
 //Pegando o valor do ID do produto recebido:
 $id = $_GET['id'];
 
 //Array de produtos do ID recebido atual:
 $currentProduct = $_SESSION['products'][$id];
-
-// Função para alterar valores alterados do produto (exceto imagem):
-function editProduct ($currentProduct,$editedProduct,$id){
-  foreach ($currentProduct as $key=>$value) {
-    // Para o campo 'image' será feito de outra forma, pois temos que salvar a imagem nova
-    if($key != "image"){
-      if ($value != $editedProduct[$key]){
-        $_SESSION['products'][$id][$key] = $editedProduct[$key];
-      }
-    }
-  }
-}
 
 if($_POST) {
   //Pegando o valor do ID do produto recebido:

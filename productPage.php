@@ -1,5 +1,5 @@
 <?php 
-  require("variables.php"); 
+  require_once("config/functions.php");
   
   //Checando se está recebendo a informação do _GET corretamente:
   // var_dump($_GET);
@@ -7,11 +7,9 @@
 
   //Pegando o valor do ID do produto recebido:
   $id = $_GET['id'];
-  // var_dump($id);
 
   //Array de dados do ID recebido via GET:
   $product = $_SESSION['products'][$id];
-  // var_dump($product);
 
 ?>
 
