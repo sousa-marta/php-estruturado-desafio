@@ -2,8 +2,6 @@
   //Incluindo variáveis.php que já contém session_start:
   require("variables.php");
 
-  var_dump($_SESSION);
-
   // Criando função para acrescentar novos produtos numa session. Entra com 
   function addProduct($productName,$productCategory,$productDescription,$productQuantity,$productPrice,$imgPath){
     //Se ainda não teve nenhum produto adicionado:
