@@ -2,6 +2,7 @@
 
 require_once('variables.php');
 
+// FUNÇÕES DE MANIPULAÇÃO DE PRODUTOS
 
 // ACRESCENTAR NOVOS PRODUTOS NUMA SESSION: 
 
@@ -60,9 +61,6 @@ function editProduct ($currentProduct,$editedProduct,$id){
     }
   }
 }
-
-
-
 
 
 ?>
